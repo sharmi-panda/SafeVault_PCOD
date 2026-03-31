@@ -43,3 +43,11 @@ If you want to see SafeVault in action on your own machine:
    ```bash
    git clone [https://github.com/YOUR_USERNAME/SafeVault_PCOD.git](https://github.com/YOUR_USERNAME/SafeVault_PCOD.git)
    cd SafeVault_PCOD
+2.  **Install the gear:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Launch the App:**
+    ```bash
+    streamlit run app.py
+    ```
