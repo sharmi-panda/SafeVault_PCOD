@@ -5,7 +5,6 @@ Welcome to **SafeVault Analytics**! This project isn't just about code; it's abo
 
 In 2026, data privacy is a human right. But for researchers studying conditions like **PCOD (Polycystic Ovarian Disease)**, privacy laws often mean they can't get the data they need to build helpful AI. I built SafeVault to bridge that gap.
 
----
 
 ## How it Works
 Think of this project like an **Anime Artist**. 
@@ -35,7 +34,7 @@ If I want to draw a new hero, I don't copy Naruto’s face. Instead, I study 100
 - `app.py`: The user-friendly dashboard for real-time risk assessment.
 - `requirements.txt`: All the "magic spells" (libraries) needed to run this.
 
----
+
 
 ## Let's Get Running
 If you want to see SafeVault in action on your own machine:
