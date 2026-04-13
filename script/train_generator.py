@@ -16,10 +16,10 @@ print(f"📡 SafeVault GPS: Searching for your data at... {RAW_DATA}")
 
 # --- STEP 2: OPENING THE VAULT ---
 if not RAW_DATA.exists():
-    print("❌ ERROR: I still can't find 'raw_pcod.csv'.")
-    print(f"👉 Please make sure your file is sitting inside: {BASE_DIR}/data/")
+    print("ERROR: I still can't find 'raw_pcod.csv'.")
+    print(f"Please make sure your file is sitting inside: {BASE_DIR}/data/")
 else:
-    print("📂 FOUND IT! Opening the real PCOD data vault now...")
+    print("FOUND IT! Opening the real PCOD data vault now...")
     real_data = pd.read_csv(RAW_DATA)
     
     # Cleaning up any invisible spaces in the column names to avoid errors
@@ -27,11 +27,11 @@ else:
 
     # --- STEP 3: THE RULEBOOK (Metadata) ---
     # We teach the AI the "DNA" of your medical data.
-    print("📝 Creating the rulebook so the AI doesn't get confused...")
+    print("Creating the rulebook so the AI doesn't get confused...")
     metadata = SingleTableMetadata()
     metadata.detect_from_dataframe(data=real_data)
 
-    # ✨ THE POWER-FIX: Labeling Categories
+    # THE POWER-FIX: Labeling Categories
     # This is CRITICAL. It tells the AI which columns are Yes/No choices.
     categorical_columns = [
         'Cycle(R/I)', 'Pimple(Y/N)', 'Weight gain(Y/N)', 
@@ -41,12 +41,12 @@ else:
     for col in categorical_columns:
         if col in real_data.columns:
             metadata.update_column(column_name=col, sdtype='categorical')
-            print(f"✅ Marked '{col}' as a category.")
+            print(f"Marked '{col}' as a category.")
 
     # --- STEP 4: THE SPEEDY MATHEMATICIAN (GaussianCopula) ---
     # We swapped CTGAN for GaussianCopula because it's much more accurate 
     # for smaller, tabular datasets. It finishes in seconds!
-    print("\n🧮 SafeVault is analyzing the mathematical patterns...")
+    print("\nSafeVault is analyzing the mathematical patterns...")
     generator = GaussianCopulaSynthesizer(metadata)
     generator.fit(real_data)
 
@@ -58,12 +58,12 @@ else:
 
     # --- STEP 6: CREATING THE GHOST PATIENTS ---
     # Now we ask the AI to generate 1,000 brand-new, safe patients.
-    print("👻 Creating 1,000 high-accuracy 'Ghost Patients' (Synthetic Data)...")
+    print("Creating 1,000 high-accuracy 'Ghost Patients' (Synthetic Data)...")
     ghost_patients = generator.sample(num_rows=1000)
     
     # Save the ghosts to your data folder
     ghost_patients.to_csv(OUTPUT_DATA, index=False)
 
     print("-" * 50)
-    print(f"🎉 SUCCESS! Your high-quality safe data is ready at: {OUTPUT_DATA}")
-    print("🚀 NEXT STEP: Run your Predictor Notebook and watch that accuracy fly!")
+    print(f"SUCCESS! Your high-quality safe data is ready at: {OUTPUT_DATA}")
+    print("NEXT STEP: Run your Predictor Notebook and watch that accuracy fly!")
