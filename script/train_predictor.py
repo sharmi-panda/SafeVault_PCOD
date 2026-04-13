@@ -16,11 +16,11 @@ RAW_DATA = BASE_DIR / "data" / "raw_pcod.csv"
 GHOST_DATA = BASE_DIR / "data" / "synthetic_pcod.csv"
 MODEL_FILE = BASE_DIR / "models" / "pcod_predictor.pkl"
 
-print("📡 SafeVault GPS: Synchronizing Real and Synthetic Vaults...")
+print("SafeVault GPS: Synchronizing Real and Synthetic Vaults...")
 
 # --- STEP 2: LOADING & CLEANING ---
 if not RAW_DATA.exists() or not GHOST_DATA.exists():
-    print("❌ ERROR: Missing data files! Make sure both raw and synthetic CSVs are in the /data folder.")
+    print("ERROR: Missing data files! Make sure both raw and synthetic CSVs are in the /data folder.")
 else:
     real_df = pd.read_csv(RAW_DATA)
     ghost_df = pd.read_csv(GHOST_DATA)
@@ -50,8 +50,8 @@ else:
     # Find the Target (The Result column)
     target = find_column(real_df, 'PCOS')
 
-    print(f"✅ Symptoms Found: {features}")
-    print(f"🎯 Target Found: {target}")
+    print(f"Symptoms Found: {features}")
+    print(f"Target Found: {target}")
 
     # --- STEP 4: THE HYBRID MIX & MANUAL BALANCE ---
     # We clean the data of any "NaN" (empty) rows first
@@ -69,7 +69,7 @@ else:
     df_0 = combined[combined[target] == 0]
     df_1 = combined[combined[target] == 1]
 
-    print(f"📊 Initial Balance: Healthy({len(df_0)}) vs PCOD({len(df_1)})")
+    print(f"Initial Balance: Healthy({len(df_0)}) vs PCOD({len(df_1)})")
 
     # Upsampling the PCOD cases
     df_1_upsampled = df_1.sample(len(df_0), replace=True, random_state=42)
@@ -81,7 +81,7 @@ else:
     # --- STEP 5: TRAINING THE EXPERT JURY ---
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    print("🧠 The Jury of 500 Doctors is studying the Hybrid Vault...")
+    print("The Jury of 500 Doctors is studying the Hybrid Vault...")
     jury = RandomForestClassifier(
         n_estimators=500, 
         max_depth=15, 
@@ -93,11 +93,11 @@ else:
     # --- STEP 6: RESULTS & SAVING ---
     score = jury.score(X_test, y_test)
     print("-" * 40)
-    print(f"🚀 FINAL SAFEVAULT ACCURACY: {score * 100:.2f}%")
+    print(f"FINAL SAFEVAULT ACCURACY: {score * 100:.2f}%")
     print("-" * 40)
 
      # --- STEP 7: VISUAL ANALYTICS FOR VIVA ---
-    print("📊 Generating Visual Analytics...")
+    print("Generating Visual Analytics...")
 
     # A. Feature Importance Chart
     feat_importances = pd.Series(jury.feature_importances_, index=features)
@@ -121,5 +121,5 @@ else:
     with open(MODEL_FILE, 'wb') as f:
         pickle.dump(jury, f)
 
-    print(f"💾 Knowledge secured at: {MODEL_FILE}")
-    print("👉 FINAL STEP: Run 'streamlit run app.py' to launch the website!")
+    print(f"Knowledge secured at: {MODEL_FILE}")
+    print("FINAL STEP: Run 'streamlit run app.py' to launch the website!")
