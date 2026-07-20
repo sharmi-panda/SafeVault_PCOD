@@ -1,5 +1,5 @@
 # SafeVault Analytics
-### *Because Privacy Shouldn't Stop Progress.*
+### Because Privacy Shouldn't Stop Progress.
 
 Welcome to **SafeVault Analytics**! This project isn't just about code; it's about solving a real-world dilemma: **How do we use data to save lives without spying on people?**
 
