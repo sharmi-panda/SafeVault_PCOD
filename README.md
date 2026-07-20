@@ -21,7 +21,7 @@ If I want to draw a new hero, I don't copy Naruto’s face. Instead, I study 100
 
 ## My Toolkit
 * **Python:** The language of choice for 2026.
-* **SDV / CTGAN:** The "Art Student" that generates our synthetic data.
+* **SDV :** The "Art Student" that generates our synthetic data.
 * **Random Forest:** The "Judging Panel" that makes the final PCOD predictions.
 * **Streamlit:** To turn this math into a beautiful, clickable web app.
 * **Seaborn & Matplotlib:** To draw the "Heatmaps" that prove our fake data is accurate.
